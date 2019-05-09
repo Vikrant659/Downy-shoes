@@ -7,6 +7,7 @@ use App\Product;
 use App\Cart;
 use App\Category;
 use App\Order;
+use App\Address;
 use App\OrderDetail;
 use DB;
 Use Session;
@@ -26,7 +27,7 @@ class OrderController extends Controller
         
         // $orders = Order::paginate(5);
         // dd($orders);
-        
+
         $orders->transform(function($order, $key) {
             $order->cart = unserialize($order->cart);
             return $order;
@@ -46,5 +47,9 @@ class OrderController extends Controller
         $data = OrderDetail::orderBy('created_at','desc')->where(['order_id'=> $id])->get();
         return view('admin.orderdetail',compact('data'));
     }
-   
+    public function deleteadd($id)
+    {
+      $address = Address::where('id',$id)->delete();
+      return redirect()->back()->with('success','Address Deleted Successfully !');
+    }
 }

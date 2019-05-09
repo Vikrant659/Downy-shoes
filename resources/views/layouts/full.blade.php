@@ -40,6 +40,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+<!-- //favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/images/favicon-16x16.png') }}">
+
 </head>
 
 <body>
@@ -141,15 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             @yield('header')
         </div>
     </div>
-	@if(Session::has('success'))
-        <div class="row">
-            <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-                <div id="charge-message" class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
-            </div>
-        </div>
-    @endif
+	
     @yield('content')
 	
     <!-- footer -->

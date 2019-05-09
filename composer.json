@@ -14,6 +14,7 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "laraveldaily/laravel-charts": "^0.1.4",
+        "mpdf/mpdf": "^8.0",
         "stripe/stripe-php": "^6.31"
     },
     "require-dev": {

@@ -31,9 +31,10 @@
 						<br>
 						<b>Phone.no:</b>{{$old->mobile_number}}
 						<br>
-						<div class = "">
+						<div class = "row-lg-4 row-lg-4 row-lg-4">
 						<a href="{{url('payment/'.$old->id)}}" class="btn btn-primary" style = "color:white;background-color:#090909">Use Address</a>
-						<span><a href="{{url('editaddress/'.$old->id)}}" class="btn btn-primary" style = "color:white;background-color:#090909">Edit Address</a></span>
+						<span><a href="{{url('editaddress/'.$old->id)}}" class="btn btn-primary" style = "color:white;background-color:#090909">Edit Address</a>
+						<a href ="{{url('deleteaddress/'.$old->id)}}" class= "btn btn-danger">Delete Address</a></span>
 						<br><br>
 					@endforeach
 				</div>
@@ -42,7 +43,7 @@
 			</div>
 			<br>
 			<div class="col-md-8 address_form pull-center">
-			<h4>Shipping Details</h4>
+			<h3>Shipping Details</h3>
 			<form action="{{url('storeaddress')}}" method="post" class="creditly-card-form agileinfo_form" >
 				@csrf
 				<section class="creditly-wrapper wrapper">

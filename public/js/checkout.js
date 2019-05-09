@@ -41,7 +41,7 @@ card.addEventListener('change', function(event) {
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
   event.preventDefault();
-
+  $("#trigger").attr("disabled", true);
   stripe.createToken(card).then(function(result) {
     if (result.error) {
         // console.log(result.error);
@@ -51,6 +51,7 @@ form.addEventListener('submit', function(event) {
     } else {
       // Send the token to your server.
       stripeTokenHandler(result.token);
+      
     //   console.log(result.token);
     }
   });
@@ -68,6 +69,7 @@ function stripeTokenHandler(token) {
 
   // Submit the form
   form.submit();
-  $('#preload').css("display","block");
   $("#trigger").attr("disabled", true);
+  $('#preload').css("display","block");
+ 
 }

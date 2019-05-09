@@ -21,9 +21,10 @@
 			
 			<div class="col-md-8 single-right-left simpleCart_shelfItem">
 				<h3>{{$products->name}}</h3>
-				<p><span class="item_price">${{$products->price}}</span>
-					<del>$1,199</del>
+				<p><b>Price:</b><span class="item_price">${{$products->price}}</span>
+					<del>${{$products->price+200}}</del>
 				</p>
+				<p><b>Size:</b>{{$products->size}}</p>
 				<div class="rating1">
 					<ul class="stars">
 						<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -102,26 +103,33 @@
 							<div class="single_page">
 								<div class="bootstrap-tab-text-grids">
 									<div class="bootstrap-tab-text-grid">
+									@foreach($products->review as $review)
+									
 										<div class="bootstrap-tab-text-grid-left">
 											<img src="{{ asset('frontend/images/t1.jpg') }}" alt=" " class="img-responsive">
-										</div>
+										</div> 
 										<div class="bootstrap-tab-text-grid-right">
 											<ul>
-												<li><a href="#">Admin</a></li>
-												<li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
+												<b><li>{{$review->review_title}}</li></b>
 											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam,
-												quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
-												autem vel eum iure reprehenderit.</p>
+											<br>								
+												<h5>{{$review->description}}</h5>		
+																			
+											<p>By:{{ucfirst($review->name)}} on <span>{{$review->created_at->format('d-m-y')}}<span></p>
+											
 										</div>
 										<div class="clearfix"> </div>
+										<hr>
+									@endforeach
 									</div>
+									
 									<div class="add-review">
 										<h4>add a review</h4>
-										<form action="#" method="post">
-											<input type="text" name="Name" required="Name">
-											<input type="email" name="Email" required="Email">
-											<textarea name="Message" required=""></textarea>
+										<form action="{{url('/review/'.$products->id)}}" method="post">
+											@csrf
+											<input type="text" name="title" required="Name" style = "width:100%" placeholder = "Review title">
+											{{--<!-- <input type="email" name="Email" required="Email"> -->--}}
+											<textarea name="description" required="" placeholder = "Description"></textarea>
 											<input type="submit" value="SEND">
 										</form>
 									</div>

@@ -9,6 +9,7 @@ use App\Category;
 use App\Order;
 use App\Contact;
 use App\Address;
+use App\Review;
 use DB;
 Use Session;
 use Auth;
@@ -47,13 +48,29 @@ class PagesController extends Controller
     {
         $id = $request->id;
         $this->validate($request,[
-            'name' => ['required', 'string', 'max:15', 'min:2']
+            'name' => ['required', 'string', 'max:15', 'min:2'],
+            'email' => ['required','email']
         ]);
-        $user = User::find($id);
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->save();
-        return redirect('/')->with('success','Data Updated!!');
+        $check_user_email = User::where(['email'=>$request->get('email')])->where(function($query) use($id)
+        {
+            if(isset($id))
+            {
+                $query->where('id', '<>', $id);
+            }
+        })->exists();
+        if($check_user_email)
+        {
+            return redirect()->back()->with('error','Email already exist');
+        }
+        else
+        {
+            $user = User::find($id);
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->save();
+            return redirect()->back()->with('success','Data Updated');
+        }
+        
     }
     public function prolist($id) {
         $cat = Category::where(['id'=> $id])->first();
@@ -104,12 +121,6 @@ class PagesController extends Controller
     }
     public function updateaddress(Request $request)
     {
-    //     if (!Session::has('cart')) {
-    //         return view('pages.cart');
-    //     }
-    //     $oldCart = Session::get('cart');
-    //     $cart = new Cart($oldCart);
-    //     $total = $cart->totalPrice;
         $id = $request->id;
         $this->validate($request,[
             'address1' => 'required',
@@ -129,6 +140,21 @@ class PagesController extends Controller
         $data->zip_code = $request->get('zip_code');
         $data->save();
         return redirect()->route('checkout');
+    }
+    public function review(Request $request,$id)
+    {
+        $this->validate($request,[
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+        $reviews = $request->all();
+        $data = new Review();
+        $data->product_id = $id;
+        $data->name = Auth::user()->name;
+        $data->review_title = $request->get('title');
+        $data->description = $request->get('description');
+        $data->save();
+        return redirect()->back()->with('success','Review Updated!!');
     }
  }
 

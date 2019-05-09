@@ -5,7 +5,7 @@
 <div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<h3 class="head">Contact Us</h3>
-			<p class="head_para">Add Some Description</p>
+			
 			<div class="inner_section_w3ls">
 				<div class="col-md-7 contact_grid_right">
 					<h6>Please fill this form to contact with us.</h6>

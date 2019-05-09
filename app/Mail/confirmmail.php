@@ -11,6 +11,7 @@ use App\Cart;
 class confirmmail extends Mailable
 {
     public $cart;
+    public $pdf_path;
     use Queueable, SerializesModels;
 
     /**
@@ -18,9 +19,10 @@ class confirmmail extends Mailable
      *
      * @return void
      */
-    public function __construct($cart)
+    public function __construct($cart,$pdf_path)
     {
         $this->cart=$cart;
+        $this->pdf_path=$pdf_path;
     }
 
     /**
@@ -30,6 +32,6 @@ class confirmmail extends Mailable
      */
     public function build()
     {
-        return $this->view('pages.invoice');
+        return $this->view('pages.invoice')->attach($this->pdf_path);
     }
 }

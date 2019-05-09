@@ -55,8 +55,8 @@
 
 @else
 
-
-<div class="row">
+<br><br>
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <br>
             <h2>You have not ordered anything yet
@@ -65,6 +65,6 @@
             <br>
         </div>
     </div>
-
+s<br><br>
 @endif
 @endsection

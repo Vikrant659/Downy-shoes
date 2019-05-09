@@ -136,7 +136,7 @@
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-3 slidering">
 									<div class="thumbnail"><img src="{{ asset('frontend/images/g4.jpg') }}" alt="Image" style="max-width:100%;"></div>
-								</div><td class="invert">${{$product ['item']['price']}}</td>
+								</div>
 								
 							</div>
 						</div>

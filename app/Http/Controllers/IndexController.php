@@ -16,6 +16,7 @@ use Stripe\Charge;
 use Auth;
 use Mail;
 use App\Mail\confirmmail;
+use Mpdf\Mpdf;
 class IndexController extends Controller
 {
     // To show product listing to Customer
@@ -177,8 +178,13 @@ class IndexController extends Controller
             }
             $user = Auth::user();
             // Mail::from('Downyshoes@example.com', 'Downy Shoes')>send(new confirmmail($cart));
-            Mail::to($user->email)->send(new confirmmail($cart));
-            Mail::to('vikrantrana@gmail.com')->send(new confirmmail($cart));
+            $mpdf = new \Mpdf\Mpdf();
+            $mpdf->WriteHTML(\View::make('pages.invoice',compact('cart')));
+            $pdf_path = public_path() . '/invoiceuser/' . $order->id . '.pdf';
+            $mpdf->Output($pdf_path, 'F');
+            Mail::to($user->email)->send(new confirmmail($cart,$pdf_path));
+
+            Mail::to('vikrantrana@gmail.com')->send(new confirmmail($cart,$pdf_path));
             Session::forget('cart');
             $order = Order::where('user_id',Auth::User()->id)->where('id',$order->id)->first();
             $cart = unserialize($order->cart);

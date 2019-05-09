@@ -5,7 +5,7 @@
 			<!-- //product left -->
 			<!-- product right -->
 <div class="left-ads-display col-md-9" style="margin: 70px 0px 85px 172px;position: inherit;">
-	<div class="wrapper_top_shop">
+	<div class="wrapper_top_shop" style = "padding-bottom:0px">
 		<div class="col-md-6 shop_left">
 			<img src="{{ asset('frontend/images/banner3.jpg') }}" alt="">
 			<h6>40% off</h6>
@@ -31,7 +31,7 @@
 												<a href="{{url('/single/'.$product->id)}}" class="link-product-add-cart">Quick View</a>
 											</div>
 										</div>
-										<span class="product-new-top">New</span>
+									
 									</div>
 									<div class="item-info-product">
 										<h4>
@@ -81,7 +81,7 @@
 							$(".badge").html(oldcount + 1);
 						}
 						
-						swal("Ordered Successful!", "You item is added to cart!!", "success");
+						swal("Added to Cart!!", "You item is added to cart!!", "success");
 						setTimeout(function () {
                             swal.close();
                         }, 1000);

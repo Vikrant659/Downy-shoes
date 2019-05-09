@@ -1,6 +1,22 @@
 @extends('layouts.full')
 
 @section('content')
+@if(Session::has('error'))
+<div class="row">
+    <div class="alert alert-danger alert-dismissible col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Warning!</strong> {{  Session::get('error') }}
+    </div>
+</div>
+@endif
+@if(Session::has('success'))
+<div class="row">
+    <div class="alert alert-success alert-dismissible col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> {{  Session::get('success') }}
+    </div>
+</div>
+@endif
 <br><br>
 <div class="container">
     <div class="row justify-content-center">
@@ -41,7 +57,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" action>
+                                <button type="submit" style = "background-color:black;border-color:black" class="btn btn-primary" action>
                                     {{ __('Update') }}
                                 </button>
                             </div>

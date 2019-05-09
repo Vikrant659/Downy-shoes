@@ -46,6 +46,8 @@ Route::post('/payment','IndexController@postcheck')->name('payment');
 Route::get('/checkout','IndexController@check')->name('checkout')->middleware('verified');
 Route::post('/storeaddress','IndexController@storeaddress');
 Route::get('/edit/{id}', 'PagesController@edit')->name('edit');
+Route::post('/review/{id}','PagesController@review');
+Route::get('/deleteaddress/{id}','OrderController@deleteadd');
 });
 // ---------------Admin page routes-------------------
 Route::match(['GET','POST'],'/admin','AdminController@signin');
